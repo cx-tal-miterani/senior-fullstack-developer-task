@@ -6,6 +6,7 @@ export default createStore({
 		user: null,
 	},
 	getters: {
+		username: (state) => state.user?.username || null,
 		roles: (state) => state.user?.roles || [],
 		status: (state) => state.user?.status || null,
 	},
