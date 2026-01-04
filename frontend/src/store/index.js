@@ -1,19 +1,30 @@
 import { createStore } from "vuex"
+import axios from "axios";
 
 export default createStore({
 	state: {
-		// Define your state here
+		user: null,
 	},
 	getters: {
-		// Define your getters here
+		roles: (state) => state.user?.roles || [],
+		status: (state) => state.user?.status || null,
 	},
 	mutations: {
-		// Define your mutations here
+		setUser(state, user) {
+			state.user = user
+		},
 	},
 	actions: {
-		// Define your actions here
-	},
-	modules: {
-		// Define your modules here
+		async getUser({ commit }, userData) {
+			try {
+				const response = await axios.post(`/api/users/login/${userData}`)
+				if (response.data) {
+					commit("setUser", response.data)
+				}
+			} catch (error) {
+				console.error("Error fetching user data:", error)
+				throw error
+			}
+		}
 	},
 })
