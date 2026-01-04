@@ -8,8 +8,8 @@ export class User {
   @Column({ unique: true })
   username: string;
 
-  @Column({ default: 'User' }) // ❌ Single role only
-  role: string;
+  @Column({ type: 'json', default: '["User"]' })
+  roles: string[];
 
   @Column()
   status: boolean;
