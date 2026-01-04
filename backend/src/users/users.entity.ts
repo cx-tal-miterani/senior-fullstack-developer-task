@@ -1,5 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
+export enum UserStatus {
+  Enabled = 'Enabled',
+  Disabled = 'Disabled',
+  Deleted = 'Deleted',
+}
+
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
@@ -12,5 +18,5 @@ export class User {
   roles: string[];
 
   @Column()
-  status: boolean;
+  status: UserStatus;
 }
